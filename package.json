@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "oleg stotsky",
+  "license": "ISC",
+  "dependencies": {
+    "eosjs": "^16.0.9",
+    "mysql": "^2.16.0",
+    "sha256": "^0.2.0"
+  }
+}
