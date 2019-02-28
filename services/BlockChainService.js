@@ -2,10 +2,10 @@ const BlockChainService = (eosjs) => ({
   writeHashToBlockChain: (hash, id) => {
     return eosjs.transaction({
       actions: [{
-        account: 'trulynewhash',
+        account: 'quoteshashes',
         name: 'upsert',
         authorization: [{
-          actor: 'trulynewhash',
+          actor: 'quoteshashes',
           permission: 'active'
         }],
         data: {
