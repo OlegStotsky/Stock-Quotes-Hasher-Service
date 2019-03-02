@@ -15,7 +15,7 @@ const QuotesService = (QuotesRepository, BlockChainService, HashesService) => ({
     console.log('Writing hash to db... ', hash)
     const hashId = await HashesService.createHash(hash) 
 
-    console.log('Writing hash to blockchain...')
+    console.log('Writing hash to blockchain...', hash, hashId)
     const transaction = await BlockChainService.writeHashToBlockChain(hash, hashId)
     console.log('Transaction: ', transaction)
 
