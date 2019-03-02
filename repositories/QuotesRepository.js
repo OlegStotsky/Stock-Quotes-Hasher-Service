@@ -6,6 +6,17 @@ const QuotesRepository = (db, formatter, HashesRepository) => ({
     return result
   },
 
+  findQuotesByHashId: async (hashId) => {
+    const rawQuery = `
+          SELECT base, quote, bid, ask, createdAt, val AS hash FROM Quote, Hash
+          WHERE Quote.hash_id = Hash.id
+          AND Hash.id = ?
+          `
+    const formattedQuery = formatter.format(rawQuery, [hashId])
+
+    return db.query(formattedQuery)
+  },
+
   updateHashes: async (quotesIds, hashId) => { 
     const rawQuery = `UPDATE Quote SET hash_id = ? WHERE id IN (${quotesIds.join(',')})`
     const formattedQuery = formatter.format(rawQuery, [hashId])

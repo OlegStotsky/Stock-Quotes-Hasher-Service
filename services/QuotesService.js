@@ -1,6 +1,6 @@
 const sha256 = require('sha256')
 
-const QuotesService = (QuotesRepository, BlockChainService, HashesService) => ({
+const QuotesService = (QuotesRepository, BlockChainService, HashesService, QuotesPublisher) => ({
   getUnhashedQuotesAndWriteThemToBlockchain: async () => {
     console.log('Looking up new unhashed transactions...')
     const unhashedQuotes = await QuotesRepository.findAllUnhashedQuotes()
@@ -21,7 +21,10 @@ const QuotesService = (QuotesRepository, BlockChainService, HashesService) => ({
 
     console.log('Updating quotes hash value...')
     const quotesIds = unhashedQuotes.map(quote => quote.id)
-    return QuotesRepository.updateHashes(quotesIds, hashId)
+    await QuotesRepository.updateHashes(quotesIds, hashId)
+
+    const updatedQuotes = await QuotesRepository.findQuotesByHashId(hashId)
+    return QuotesPublisher.send(updatedQuotes)
   }
 })
 
