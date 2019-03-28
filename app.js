@@ -1,6 +1,6 @@
 const recursiveTimeout = async (fn, timeout) => {
   await fn()
-  setTimeout(fn, 1000)
+  setTimeout(() => recursiveTimeout(fn, timeout), timeout)
 }
 
 const Application = (QuotesService) => ({
